@@ -1,4 +1,5 @@
 import random
+from flask import Flask, render_template
 
 class Card:
     def __init__(self, color, value):
@@ -37,8 +38,6 @@ class Deck:
             else:
                 break  # Handle empty deck
         return dealt_cards
-
-from flask import Flask, render_template
 
 app = Flask(__name__)
 
