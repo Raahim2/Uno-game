@@ -39,15 +39,45 @@ class Deck:
                 break  # Handle empty deck
         return dealt_cards
 
+class Game:
+    def __init__(self, num_players=1):
+        self.num_players = num_players
+        self.deck = Deck()
+        self.deck.shuffle()
+        self.discard_pile = []
+        self.players = []
+        self.current_player = 0
+
+        # Initialize players and deal cards
+        for i in range(num_players):
+            self.players.append(self.deck.deal(7))
+
+        #Start discard pile
+        self.discard_pile.append(self.deck.deal(1)[0])
+
+
+    def play_card(self, card):
+        if card in self.players[self.current_player]:
+            self.players[self.current_player].remove(card)
+            self.discard_pile.append(card)
+            self.current_player = (self.current_player + 1) % self.num_players
+            # Add logic to check for win condition, draw cards etc.
+
+    def draw_card(self):
+        if self.deck:
+            card = self.deck.deal(1)[0]
+            self.players[self.current_player].append(card)
+
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    deck = Deck()
-    deck.shuffle()
-    hand = deck.deal(7)
+    game = Game()
+    hand = game.players[0]
+    top_discard = game.discard_pile[-1]
     cards = [str(card) for card in hand]
-    return render_template('index.html', cards=cards)
+    top_discard_card = str(top_discard)
+    return render_template('index.html', cards=cards, top_discard_card=top_discard_card)
 
 if __name__ == '__main__':
     app.run(debug=True)
