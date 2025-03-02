@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitMax | Flask</title>
+    <title>Card Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div className="container">
-        <header className="header">
-            <h1>GitMax Flask Template</h1>
-            <div className="logo-container">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" className="rotating-logo">
+    <div class="container">
+        <div id="game-area">
+            <div id="player1-hand">
+                <h2>Player 1</h2>
+                <div class="hand">
+                    </div>
             </div>
-        </header>
-        
-        <main className="main-content">
-            <p>Start building something amazing with Flask!</p>
-        </main>
+            <div id="deck">
+                <h2>Deck</h2>
+                <img src="{{ url_for('static', filename='images/cardback.png') }}" alt="Deck" class="card">
+            </div>
+            <div id="discard-pile">
+                <h2>Discard Pile</h2>
+                <div class="discard-pile">
+                    </div>
+            </div>
+            <div id="player2-hand">
+                <h2>Player 2</h2>
+                <div class="hand">
+                    </div>
+            </div>
 
-        <footer className="footer">
-            <p>&copy; 2025 My Flask App</p>
-        </footer>
+        </div>
     </div>
 </body>
 </html>
